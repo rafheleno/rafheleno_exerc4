@@ -22,13 +22,15 @@ p {
   line-height: 1.5;
 }
 
+
+
 .hero {
   background-image: url('hero.jpg');
   background-size: cover;
   background-position: center;
   padding: 100px 0;
   text-align: center;
-  color: #fff;
+  color: #fa1111;
 }
 
 .hero h2 {
@@ -38,13 +40,16 @@ p {
 
 .hero p {
   font-size: 20px;
+  margin-top: 10px;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .hero .btn {
+  display: inline-block;
   background-color: #007bff;
   color: #fff;
+  margin-top: 20px;
   padding: 12px 20px;
   border: none;
   cursor: pointer;
@@ -68,6 +73,54 @@ p {
 .services li {
   display: inline-block;
   margin: 0 20px;
+}
+
+.services h2{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.services p{
+  color:white;
+}
+
+.textDeclaration{
+  color: black;
+  background-color: white;
+  text-align: justify;
+  position: relative;
+  margin: 25px;
+}
+
+.boxloons{
+
+  position: relative;
+  max-width: 600px;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(5, 5, 5, 0.226);
+
+}
+
+.boxloons a {
+  color:aqua;
+}
+
+.boxloons h2{
+  color: white;
+}
+.left{
+  background-color:rgb(102, 100, 100) ;
+  margin-left: auto;
+  margin-right: 50px;
+}
+
+.right {
+  background-color:rgb(102, 100, 100) ;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 50px;
 }
 
 .benefits {
