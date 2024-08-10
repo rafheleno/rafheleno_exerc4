@@ -8,17 +8,42 @@
 </head>
 <body>
   <header>
-    <h1>Redes e Infraestrutura Web</h1>
-    <p>Sua infraestrutura de TI segura e confiável</p>
+    <div class="esquerda"></div>
+    <div class="centro">   
+      <h1>Redes e Infraestrutura Web</h1>
+      <p>Sua infraestrutura de TI segura e confiável</p>
+    </div>
+    <div class="direita">
+      <label>Acesso</label><br>
+      <form id="log-in">
+        <input type="email" id="email" placeholder="EMAIL VALIDO" required><br>
+        <input type="password" id="password" placeholder="SENHA ACESSO MINIMO 6 D"><br>
+        <div style="display: none;" id="div_username"> 
+            <input type="text" id="username" placeholder="NOME DE USUARIO"><br>
+        </div>
+      </form>
+      <button id="logsubmit">Entrar</button>
+      <div id="msg_login" style="color: white;">off-line</div>
+    </div>
   </header>
 
   <section class="hero">
-    <img src="hero.jpg" alt="Data center moderno e seguro">
+    <img src="/images/dc.jpg" alt="Data center moderno e seguro">
     <h2>Cansado de problemas de infraestrutura de TI que impedem o crescimento do seu negócio?</h2>
     <p>O curso de Redes e Infraestrutura Web oferece soluções completas em redes e infraestrutura para empresas de todos os portes.</p>
     <a href="#contact" class="btn">Entre em contato</a>
     <a href="#Localizacao" class="btn">Nossa Localização</a>
   </section>
+
+  <div class="login">
+
+      <div>
+
+
+
+      </div>
+
+  </div>
 
   <section class="services">
     <h2>Nossos serviços</h2>
@@ -104,7 +129,7 @@
       <input type="text" id="name" name="name" required>
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="emailcontact" name="email" required>
 
       <label for="message">Mensagem:</label>
       <textarea id="message" name="message" required></textarea>
@@ -124,5 +149,59 @@
   <footer>
     <p>&copy; 2024 Especialização em Desenvolvimento Web - IFSP</p>
   </footer>
+
+
+  <script>
+     
+      var form = document.getElementById('log-in');
+
+      document.getElementById('logsubmit').addEventListener('click', function(){
+
+        const email = document.getElementById('email').value;
+        const senha =  document.getElementById('password').value;
+        const usuario = document.getElementById('username').value;
+
+        var acesso = 'http://localhost:3000/login';
+        if(document.getElementById('logsubmit').innerText == "Cadastrar-se"){
+          acesso += '/register';
+        }
+        //alert(acesso+" --- "+document.getElementById('logsubmit').innerText);
+        /*se o botao tivel o label cadastrar-se entao registra um novo usuario  */
+
+        fetch(acesso,{
+
+          method: 'POST',
+          headers:{
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({email,senha,usuario})                
+        })
+        .then(response => response.json())
+        .then(data => {
+          // capturando a menagem de retorno do servidor SGDB
+          document.getElementById('msg_login').innerText =data.msg;
+          
+          if(data.msg=='Usuário não encontrado'){
+            // caso o usuario nao esteja cadastrado entra em modo novo usuario
+            document.getElementById('div_username').style.display = 'block';
+            document.getElementById('logsubmit').innerText = "Cadastrar-se";
+          }else if(data.msg=="Cadastro mal sucedido"){
+            document.getElementById('msg_login').innerText += " verifique suas informações"
+          }else{
+            // se encontrar ira limpar o formulario  
+            document.getElementById('log-in').reset();
+            document.getElementById('div_username').style.display = 'none';
+            document.getElementById('logsubmit').innerText = "Entrar";
+          }
+        
+        }).catch(error => console.error('Erro:',error));
+        
+      })
+
+
+
+  </script>
+
+
 </body>
 </html>
